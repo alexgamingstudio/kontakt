@@ -77,26 +77,43 @@
 
   <main>
     <h2>Kontaktiere uns</h2>
-    <form action="senden.php" method="post">
+    <form id="mailForm">
       <label>
         Dein Name:
-        <input type="text" name="name" required>
+        <input type="text" id="name" required>
       </label>
       <label>
         Deine E-Mail-Adresse:
-        <input type="email" name="email" required>
+        <input type="email" id="email" required>
       </label>
       <label>
         Deine Nachricht:
-        <textarea name="message" rows="6" required></textarea>
+        <textarea id="message" rows="6" required></textarea>
       </label>
-      <button type="submit">Nachricht absenden</button>
+      <button type="submit">Nachricht senden</button>
     </form>
   </main>
 
   <footer>
     &copy; 2025 Schulorganiser – Alle Rechte vorbehalten
   </footer>
+
+  <script>
+    document.getElementById('mailForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const mailtoLink = `mailto:team.alexgaming@icloud.com`
+        + `?subject=Kontakt von ${encodeURIComponent(name)}`
+        + `&body=Von: ${encodeURIComponent(name)} (${encodeURIComponent(email)})%0D%0A%0D%0A`
+        + `${encodeURIComponent(message)}`;
+
+      window.location.href = mailtoLink;
+    });
+  </script>
 
 </body>
 </html>
